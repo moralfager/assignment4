@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<%- include('./header') %>
+<%- body %>
+<!-- Секция для графика цен акций -->
+<div>
+    <h2>Цены акций</h2>
+    <canvas id="stockPricesChart"></canvas>
+</div>
+
+<!-- Секция для графика погоды -->
+<div>
+    <h2>Погода</h2>
+    <canvas id="weatherChart"></canvas>
+</div>
+
+<%- include('./footer') %>
+
+<script>
+    // Загрузка и визуализация данных после загрузки документа
+    document.addEventListener('DOMContentLoaded', function() {
+        // Функция для имитации получения данных о ценах акций
+        async function fetchStockPrices() {
+            // Имитация асинхронного запроса к API
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve({
+                        labels: ['Январь', 'Февраль', 'Март', 'Апрель'],
+                        data: [120, 109, 130, 105]
+                    });
+                }, 1000);
+            });
+        }
+
+        // Функция для имитации получения данных о погоде
+        async function fetchWeatherData() {
+            // Имитация асинхронного запроса к API
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve({
+                        labels: ['Понедельник', 'Вторник', 'Среда', 'Четверг'],
+                        data: [22, 19, 23, 24]
+                    });
+                }, 1000);
+            });
+        }
+
+        // Визуализация данных о ценах акций
+        fetchStockPrices().then(stockData => {
+            const ctx = document.getElementById('stockPricesChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: stockData.labels,
+                    datasets: [{
+                        label: 'Цена акции ($)',
+                        data: stockData.data,
+                        fill: false,
+                        borderColor: 'rgb(75, 192, 192)',
+                        tension: 0.1
+                    }]
+                },
+                options: {}
+            });
+        });
+
+        // Визуализация данных о погоде
+        fetchWeatherData().then(weatherData => {
+            const ctx = document.getElementById('weatherChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: weatherData.labels,
+                    datasets: [{
+                        label: 'Температура (°C)',
+                        data: weatherData.data,
+                        backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                        borderColor: 'rgba(255, 159, 64, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {}
+            });
+        });
+    });
+</script>
+
+</html>
+

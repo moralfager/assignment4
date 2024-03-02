@@ -1,0 +1,31 @@
+<div class="post">
+    <h2 class="post-title post-content"><%= post.title %>
+        <span class="post-date"><%= post.updatedAt.toDateString() %></span>
+    </h2>
+    <section class="post-body post-content">
+        <article ><%= post.body %></article>
+        <div class="post-host-div">
+            <a href="/portfolio/<%= post.email %>" class="post-host"><b>Author: <%= host %></b></a>
+        </div>
+    </section>
+    <% if (admin) { %>
+        <a href="/edit-portfolio/<%= post.id %>" class="post-btn">Edit</a><span><a href="#" class="post-btn delete">Delete</a>.</span>
+    <% } %>
+    <button onclick="history.back()">Go Back</button>
+    <!-- <a href="#" class="like">&hearts;</a> -->
+</div>
+
+<script>
+    const del = document.querySelector('.delete');
+    del.addEventListener('click', async (event) => {
+        event.preventDefault();
+        try {
+            const endpoint = await fetch('/delete-portfolio/<%= post.id%>', {
+                method: 'DELETE'
+            });
+            location.assign('/portfolio/<%= post.email %>');
+        } catch (error) {
+            console.log(error);
+        }
+    });
+</script>

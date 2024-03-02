@@ -1,0 +1,15 @@
+<nav>
+    <h1><a href="/"><img src="https://upload.wikimedia.org/wikipedia/commons/7/79/HeadHunter_logo.png" alt="LOGO" style="height: 50px;"></a></h1>
+
+    <ul>
+        <% if (user) { %>
+            <li>Welcome, <%= user.nickName %></li>
+            <li><a href="/portfolio/<%= user.email %>" class="header-blogs">All portfolio</a></li>
+            <li><a href="/add-portfolio" class="btn">Add Portfolio</a></li>
+            <li><a href="/logout">Log Out</a></li>
+        <% } else { %>
+            <li><a href="/login">Log In</a></li>
+            <li><a href="/signup" class="btn">Sign Up</a></li>
+        <% } %>
+    </ul>
+</nav>

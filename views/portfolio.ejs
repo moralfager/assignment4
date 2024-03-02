@@ -1,0 +1,16 @@
+<h2><%= locals.title %></h2>
+<section class="blogs">
+    <ul class="blogs-ul">
+        <% data.forEach(post => { %>
+         <li class="blogs-li">
+            <a href="/post/<%= post._id %>">
+                <div class="post-title-date">
+                    <span><b><%= post.title %></b></span>
+                    <span class="blogs-list_date"><%= post.updatedAt.toDateString() %></span>
+                </div>
+                <div class="blog-body"><%= post.body.slice(0, 220) %>...</div>
+            </a>
+         </li>
+        <% }) %>
+    </ul>
+</section>

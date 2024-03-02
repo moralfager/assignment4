@@ -1,0 +1,14 @@
+<h2>home</h2>
+<ul class="article-ul">
+    <% data.forEach(post => { %>
+     <li class="article-grid">
+        <a href="/post/<%= post._id %>">
+            <p class="article-content article-title"><b><%= post.title.length > 25 ? post.title.slice(0, 25) + '...' : post.title %></b></p>
+            <p class="article-content"><%= post.body.slice(0, 40) %>...</p>
+        </a>
+        <p class="article-list_date article-content"><%= post.createdAt.toDateString() %></p>
+        <a href="/portfolio/<%= post.email %>" class="article-list_name article-content"><b><%= post.nickName %></b></a>
+    </li>
+    <% }) %>
+</ul>
+
